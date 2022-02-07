@@ -6,10 +6,18 @@ let ctx = canvas.getContext("2d");
 let level = 1;
 let score = 0;
 
+
+// detects the level and shows the map for that level
 function drawLevelMap() {
   if (level == 1) {
     ctx.beginPath();
     ctx.rect(20, 30, 50, 50);
+    ctx.fillStyle = "#6432a8";
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(300, 30, 50, 50);
     ctx.fillStyle = "#6432a8";
     ctx.fill();
     ctx.closePath();
