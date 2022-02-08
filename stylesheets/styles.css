@@ -16,16 +16,19 @@ h1 {
 }
 
 canvas {
-    background: rgb(223, 223, 223);
+    background-image: url("/StoneFloorTexture.png");
     display: block;
     margin: 0 auto;
+    border-radius: 10px;
 }
 
 button {
-    padding: 1em;
+    padding: 2px;
     border-radius: 25px;
     border: none;
     background-color: rgb(27, 27, 27);
     color: white;
-
+    position: fixed;
+    bottom: 62px;
+    left: 26px;
  }
