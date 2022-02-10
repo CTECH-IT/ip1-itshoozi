@@ -3,16 +3,29 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 
+// set the level and the amount of gold coins collected to the start amount
 let level = 1;
-let score = 0;
+let coins = 0;
 
+//set coin color to yellow
+let coinColor = "#d4f229";
+
+// sets the keypress to false at the start of the game
 let rightPressed = false;
 let leftPressed = false;
 let upPressed = false;
 let downPressed = false;
 
-var audio = new Audio("Walking.mp3");
+// define character information for later
 
+let characterHeight = 20;
+let characterWidth = 20;
+let characterX = (canvas.width - characterWidth) / 2;
+let characterY = (canvas.height - characterHeight) / 2;
+
+// this calls the sound for walking
+
+var audio = new Audio("Walking.mp3");
 
 // level
 
@@ -24,80 +37,109 @@ function drawLevel() {
 
 // amount of rings
 
-function drawRings() {
+function coinOne() {
   ctx.beginPath();
   ctx.arc(455, 25, 15, 0, Math.PI * 2);
-  ctx.fillStyle = "#6432a8";
+  ctx.fillStyle = coinColor;
   ctx.fill();
   ctx.closePath();
+}
 
+function coinTwo() {
   ctx.beginPath();
   ctx.arc(415, 25, 15, 0, Math.PI * 2);
-  ctx.fillStyle = "#6432a8";
+  ctx.fillStyle = coinColor;
   ctx.fill();
   ctx.closePath();
 }
 
-//define character
-
-
-
-let characterHeight = 50;
-let characterWidth = 50;
-let characterX = (canvas.width - characterWidth) / 2;
-let characterY = (canvas.height - characterHeight) / 2;
-
-function drawCharacter(){
+function coinThree() {
   ctx.beginPath();
-  ctx.rect(characterX, characterY, characterWidth, characterHeight);
-  ctx.fillStyle = "#6432a8";
+  ctx.arc(375, 25, 15, 0, Math.PI * 2);
+  ctx.fillStyle = coinColor;
   ctx.fill();
   ctx.closePath();
-
 }
 
-// detects the level and shows the map for that level
-function drawLevelMap() {
-  if (level == 1) {
-    ctx.beginPath();
-    ctx.rect(20, 30, 50, 50);
-    ctx.fillStyle = "#6432a8";
-    ctx.fill();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.rect(300, 30, 50, 50);
-    ctx.fillStyle = "#6432a8";
-    ctx.fill();
-    ctx.closePath();
-  } else if (level == 2) {
-    ctx.beginPath();
-    ctx.rect(20, 30, 50, 50);
-    ctx.fillStyle = "#e1ff00";
-    ctx.fill();
-    ctx.closePath();
-  } else if ( level == 3){
-    ctx.beginPath();
-    ctx.rect(20, 30, 50, 50);
-    ctx.fillStyle = "#6ab0a9";
-    ctx.fill();
-    ctx.closePath();  
-  } else if ( level > 3) {
+function drawRings() {
+  if (coins == 1) {
+    coinOne();
+  } else if (coins == 2) {
+    coinOne();
+    coinTwo();
+  } else if (coins == 3) {
+    coinOne();
+    coinTwo();
+    coinThree();
+  }
+  if (coins == 3 && level == 3) {
     alert("You win, Congrats!");
     document.location.reload();
     clearInterval(interval);
   }
 }
 
+//define character
 
+function drawCharacter() {
+  ctx.beginPath();
+  ctx.rect(characterX, characterY, characterWidth, characterHeight);
+  ctx.fillStyle = "#20b0bd";
+  ctx.fill();
+  ctx.closePath();
+}
+
+let coinX = [140, 93, 375];
+let coinY = [250, 59, 140];
+let coinVisible = [true, true, true];
+// detects the level and shows the map for that level
+function drawLevelMap() {
+  if (level == 1) {
+    for (let i = 0; i < 3; i++) {
+      if (coinVisible[i] == true) {
+        ctx.beginPath();
+        ctx.arc(coinX[i], coinY[i], 15, 0, Math.PI * 2);
+        ctx.fillStyle = coinColor;
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+  } else if (level == 2) {
+    ctx.beginPath();
+    ctx.rect(20, 30, 50, 50);
+    ctx.fillStyle = "#e1ff00";
+    ctx.fill();
+    ctx.closePath();
+  } else if (level == 3) {
+    ctx.beginPath();
+    ctx.rect(20, 30, 50, 50);
+    ctx.fillStyle = "#6ab0a9";
+    ctx.fill();
+    ctx.closePath();
+  }
+}
+
+function collisionDetection() {
+  for (let i = 0; i < 3; i++) {
+    if (
+      characterX > coinX[i] &&
+      characterX < coinX[i] + 30 &&
+      characterY > coinY[i] &&
+      characterY < coinY[i] + 30 
+      && coinVisible[i] == true
+    ) {
+      coinVisible[i] = false;
+      coins ++;
+    }
+  }
+}
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   drawLevelMap();
 
-
-  // movement 
+  // movement
   if (rightPressed) {
     characterX += 2;
     audio.play();
@@ -128,20 +170,30 @@ function draw() {
     }
   }
 
-  // this stops the walking sound from playing 
-  if(leftPressed == false && rightPressed == false && upPressed == false && downPressed == false){
+  // this stops the walking sound from playing
+  if (
+    leftPressed == false &&
+    rightPressed == false &&
+    upPressed == false &&
+    downPressed == false
+  ) {
     audio.pause();
   }
 
   drawCharacter();
   drawLevel();
-  drawRings()
+  drawRings();
 
+  collisionDetection();
 }
 
 // lets you cheat and gain levels faster :D
 function cheat() {
   level++;
+}
+
+function coinCheat() {
+  coins++;
 }
 
 // moving around
@@ -170,12 +222,10 @@ function keyDownHandler(e) {
   }
 }
 
-
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 // character
-
 
 // interval
 
