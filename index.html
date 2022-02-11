@@ -3,24 +3,45 @@
 
   <head>
     <meta charset="utf-8">
-    <title>My Awesome Website</title>
-    <meta name="author" content="Put your name here">
-    
+    <title>coin collect</title>
+    <meta name="author" content="jeremy pringle">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="description" content="a simple game based around collecting coins and avoiding bombs">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="stylesheets/styles.css">
   </head>
 
 <body>
-  <header>
-    <h1 class="page-title">My Awesome Website</h1>
-    <button class="cheat" onclick="cheat()"></button>
-    <button onclick="coinCheat()">coin up</button>
-
-  </header>
-
-  <canvas id="myCanvas" width="480" height="320"></canvas>
-
-
+  <div class="bg-slate-900 min-h-screen text-center p-10 flex flex-col justify-center">
+    <div class="block sm:hidden">
+      <h1 class="text-white">uhh maybe use a computer nerd</h1>
+    </div>
+    <div class="mx-auto sm:block hidden">
+      <h1 class="text-white font-semibold text-3xl">Coin Collect</h1>
+      <p class="text-slate-400 pt-3">A simple game based around collecting <br> coins and avoiding bombs</p>
+      <button id="tog" class="bg-blue-500 hover:bg-blue-600 duration-300 hover:shadow-xl p-3 px-10 rounded-md mt-5 text-white">play</button>
+    </div>
+  </div>
+  <div id="modal" class="bg-slate-800 min-h-screen fixed z-10 w-full top-0 left-0 bg-opacity-40 transform -translate-x-ful scale-0 duration-300">
+    <div class="flex flex-col justify-center h-screen">
+      <div class="mx-auto p-10 bg-slate-800 rounded-md shadow-lg">
+        <div class="flex items-center pb-3 w-full">
+          <h1 class="text-white font-bold text-2xl grow-0 w-36" id="level">Level 1</h1>
+          <div class="grow w-full">
+            <div class="w-10 h-10 bg-yellow-300 rounded-full float-right mx-1 hidden" id="one"></div>
+            <div class="w-10 h-10 bg-yellow-300 rounded-full float-right mx-1 hidden" id="two"></div>
+            <div class="w-10 h-10 bg-yellow-300 rounded-full float-right mx-1 hidden" id="three"></div>
+          </div>
+        </div>
+        <canvas id="myCanvas" width="480" height="320" class="bg-slate-700 rounded-md"></canvas>
+      </div>
+    </div>
+  </div>
+  
+  <button class="z-50 p-2 rounded-full fixed bottom-52 right-10 bg-slate-800" onclick="coinCheat()"></button>
+  
   <script src="scripts/main.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
