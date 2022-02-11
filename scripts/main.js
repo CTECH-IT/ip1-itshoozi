@@ -37,27 +37,27 @@ function drawLevel() {
 
 // draws the posistion for coin #1
 function coinOneShow(){
-  document.getElementById("one").classList.remove("hidden");
+  document.getElementById("one").classList.remove("scale-0");
 }
 function coinOneHide(){
-  document.getElementById("one").classList.add("hidden");
+  document.getElementById("one").classList.add("scale-0");
 }
 
 // draws the posistion for coin #2
 function coinTwoShow(){
-  document.getElementById("two").classList.remove("hidden");
+  document.getElementById("two").classList.remove("scale-0");
 }
 function coinTwoHide(){
-  document.getElementById("two").classList.add("hidden");
+  document.getElementById("two").classList.add("scale-0");
 }
 
 
 // draws the posistion for coin #3
 function coinThreeShow(){
-  document.getElementById("three").classList.remove("hidden");
+  document.getElementById("three").classList.remove("scale-0");
 }
 function coinThreeHide(){
-  document.getElementById("three").classList.add("hidden");
+  document.getElementById("three").classList.add("scale-0");
 }
 
 
@@ -208,9 +208,7 @@ function bombCollision() {
                 characterY > bombY[i] &&
                 characterY < bombY[i] + 30
             ) {
-                alert("bruh you suck at this game");
-                document.location.reload();
-                clearInterval(interval);
+                lost();
             }
         }
     } else if (level == 2) {
@@ -221,9 +219,7 @@ function bombCollision() {
                 characterY > bombY[i] &&
                 characterY < bombY[i] + 30
             ) {
-                alert("bruh you suck at this game");
-                document.location.reload();
-                clearInterval(interval);
+                lost();
             }
         }
     } else if (level == 3) {
@@ -234,9 +230,7 @@ function bombCollision() {
                 characterY > bombY[i] &&
                 characterY < bombY[i] + 30
             ) {
-                alert("bruh you suck at this game");
-                document.location.reload();
-                clearInterval(interval);
+                lost();
             }
         }
     }
@@ -250,9 +244,7 @@ function nextLevel() {
         coinTwoHide();
         coinThreeHide();
     } else if (level > 3) {
-        alert("You win, Congrats!");
-        document.location.reload();
-        clearInterval(interval);
+win();
     }
 }
 
@@ -361,5 +353,29 @@ tog.addEventListener("click", function() {
     document.getElementById("modal").classList.add("scale-100");
 });
 
+
+// you lost toast
+
+function lost(){
+    document.getElementById("lost").classList.toggle("translate-x-96");
+    clearInterval(interval);
+    walk.pause();
+    setTimeout(function(){
+        location.reload();
+    }, 3000);
+
+}
+
+
+// you win toast :D
+function win(){
+    document.getElementById("win").classList.toggle("translate-x-56");
+    clearInterval(interval);
+    walk.pause();
+    setTimeout(function(){
+        location.reload();
+    }, 3000);
+
+}
 
 // if you have read this long, im so sorry

@@ -28,9 +28,9 @@
         <div class="flex items-center pb-3 w-full">
           <h1 class="text-white font-bold text-2xl grow-0 w-36" id="level">Level 1</h1>
           <div class="grow w-full">
-            <div class="w-6 h-6 bg-yellow-300 rounded-full float-right mx-1 hidden" id="one"></div>
-            <div class="w-6 h-6 bg-yellow-300 rounded-full float-right mx-1 hidden" id="two"></div>
-            <div class="w-6 h-6 bg-yellow-300 rounded-full float-right mx-1 hidden" id="three"></div>
+            <div class="w-6 h-6 bg-yellow-300 rounded-full float-right mx-1 scale-0 duration-500" id="one"></div>
+            <div class="w-6 h-6 bg-yellow-300 rounded-full float-right mx-1 scale-0 duration-500" id="two"></div>
+            <div class="w-6 h-6 bg-yellow-300 rounded-full float-right mx-1 scale-0 duration-500" id="three"></div>
           </div>
         </div>
         <canvas id="myCanvas" width="480" height="320" class="bg-slate-700 rounded-md"></canvas>
@@ -38,7 +38,17 @@
     </div>
   </div>
   
-  <button class="z-50 p-2 rounded-full fixed bottom-52 right-10 bg-slate-800" onclick="coinCheat()"></button>
+<button class="z-50 p-2 rounded-full fixed bottom-52 right-10 bg-slate-800" onclick="coinCheat()"></button>
+
+  <div class="fixed top-5 right-5 bg-slate-800 p-5 rounded-md px-10 transform translate-x-96 duration-300 z-50" id="lost">
+    <h1 class="text-slate-300">You lost  </h1>
+    <p class="text-slate-500">imagine being bad at <br> this game , couldn't be me</p>
+  </div>
+
+  <div class="fixed top-5 right-5 bg-slate-800 p-5 rounded-md px-10 transform translate-x-56 duration-300 z-50" id="win">
+    <h1 class="text-slate-300">You win <span class="text-green-500"> YAY!!</span></h1>
+    <p></p>
+  </div>
   
   <script src="scripts/main.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
