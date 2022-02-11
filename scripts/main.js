@@ -36,43 +36,42 @@ function drawLevel() {
 }
 
 // draws the posistion for coin #1
-function coinOne() {
-    ctx.beginPath();
-    ctx.arc(455, 25, 15, 0, Math.PI * 2);
-    ctx.fillStyle = coinColor;
-    ctx.fill();
-    ctx.closePath();
+function coinOneShow(){
+  document.getElementById("one").classList.remove("hidden");
+}
+function coinOneHide(){
+  document.getElementById("one").classList.add("hidden");
 }
 
 // draws the posistion for coin #2
-function coinTwo() {
-    ctx.beginPath();
-    ctx.arc(415, 25, 15, 0, Math.PI * 2);
-    ctx.fillStyle = coinColor;
-    ctx.fill();
-    ctx.closePath();
+function coinTwoShow(){
+  document.getElementById("two").classList.remove("hidden");
+}
+function coinTwoHide(){
+  document.getElementById("two").classList.add("hidden");
 }
 
+
 // draws the posistion for coin #3
-function coinThree() {
-    ctx.beginPath();
-    ctx.arc(375, 25, 15, 0, Math.PI * 2);
-    ctx.fillStyle = coinColor;
-    ctx.fill();
-    ctx.closePath();
+function coinThreeShow(){
+  document.getElementById("three").classList.remove("hidden");
 }
+function coinThreeHide(){
+  document.getElementById("three").classList.add("hidden");
+}
+
 
 // shows the amount of coins currently collected
 function drawRings() {
     if (coins == 1) {
-        coinOne();
+      coinOneShow();
     } else if (coins == 2) {
-        coinOne();
-        coinTwo();
+      coinOneShow();
+      coinTwoShow();
     } else if (coins == 3) {
-        coinOne();
-        coinTwo();
-        coinThree();
+      coinOneShow();
+      coinTwoShow();
+      coinThreeShow();
     }
 }
 
@@ -247,6 +246,9 @@ function nextLevel() {
     if (coins == 3) {
         level++;
         coins = 0;
+        coinOneHide();
+        coinTwoHide();
+        coinThreeHide();
     } else if (level > 3) {
         alert("You win, Congrats!");
         document.location.reload();
